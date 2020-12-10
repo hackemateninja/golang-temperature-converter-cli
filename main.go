@@ -19,31 +19,27 @@ var errReadingInput = errors.New("Error reading input")
 
 func main() {
 
-	if len(os.Args) != 2{
+	if len(os.Args) != 2 {
 		printError(errInvalidArguments)
 	}
 	originUnit = strings.ToUpper(os.Args[1])
 
 	for {
-		fmt.Print("What is the current temperature in " + originUnit + " ? "
+		fmt.Print("What is the current temperature in " + originUnit + " ? ")
 
-		_, err = fmt.Scanln(&originValue)
-
-		if err != nil {
-			 printError(errReadingInput)
+		if _, err := fmt.Scanln(&originValue); err != nil {
+			printError(errReadingInput)
 		}
 
 		if originUnit == "C" {
 			convertToFahrenheit(originValue)
-		}else{
+		} else {
 			convertToCelsius(originValue)
 		}
 
 		fmt.Print("Would you like to convert another temperature ? (y/n) ")
 
-		_, err = fmt.Scanln(&shouldConvertAgain)
-
-		if err != nil{
+		if _, err := fmt.Scanln(&shouldConvertAgain); err != nil {
 			printError(errReadingInput)
 		}
 
